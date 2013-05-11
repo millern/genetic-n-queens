@@ -8,15 +8,14 @@ var GeneticNQueens = function(n){
   this.n = n;
   this.population = this.createPopulation();
 };
-
-GeneticNQueens.prototype.createPopulation = function(){
-  var compare = function(a,b) {
+GeneticNQueens.prototype.compare = function(a,b) {
   if (a.conflicts < b.conflicts)
      return -1;
   if (a.conflicts > b.conflicts)
     return 1;
   return 0;
   };
+GeneticNQueens.prototype.createPopulation = function(){
   var array = [];
   _.each(_.range(10 * this.n), function(){
     array.push(new Board(this.n));
@@ -53,6 +52,8 @@ GeneticNQueens.prototype.matePopulation = function(){
   var newPopulation = _(mates).map(function(pair){
     return this.mateBoards(this.population[pair[0]], this.population[pair[1]]);
   }, this);
+  newPopulation.sort(this.compare);
+  newPopulation.reverse();
   return newPopulation;
 };
 
