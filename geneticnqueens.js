@@ -87,6 +87,7 @@ Board.prototype.generateHashses = function(){
   _(this.layout).each(function(colIndex, rowIndex){
     var minorIndex = rowIndex + colIndex - 1;
     var majorIndex = rowIndex - colIndex - 1;
+    //the following needs to be rewritten so that [0,0,0,0] is 6 conflicts instead 3.
     this.colHash[colIndex] = !this.colHash[colIndex] ? 1 : this.colHash[colIndex] + 1;
     this.minorDiagHash[minorIndex] = !this.minorDiagHash[minorIndex] ? 1 : this.minorDiagHash[minorIndex] + 1;
     this.majorDiagHash[majorIndex] = !this.majorDiagHash[majorIndex] ? 1 : this.majorDiagHash[majorIndex] + 1;
