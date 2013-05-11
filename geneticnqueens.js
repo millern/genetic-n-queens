@@ -58,7 +58,7 @@ GeneticNQueens.prototype.matePopulation = function(){
 
 GeneticNQueens.prototype.evolve = function(){
   var index = 0;
-  while(this.population[0]['conflicts'] > 0 && index < 1000){
+  while(this.population[0]['conflicts'] > 0 && index < 10000){
     this.prunePopulation();
     this.population = this.matePopulation();
     index++;
@@ -83,9 +83,9 @@ Board.prototype.seedBoard = function(n){
   return result;
 };
 Board.prototype.generateHashses = function(){
-  _(this.layout).each(function(colIndex){
-    var minorIndex = this.layout.length + colIndex - 1;
-    var majorIndex = this.layout.length - colIndex - 1;
+  _(this.layout).each(function(colIndex, rowIndex){
+    var minorIndex = rowIndex + colIndex - 1;
+    var majorIndex = rowIndex - colIndex - 1;
     this.colHash[colIndex] = !this.colHash[colIndex] ? 1 : this.colHash[colIndex] + 1;
     this.minorDiagHash[minorIndex] = !this.minorDiagHash[minorIndex] ? 1 : this.minorDiagHash[minorIndex] + 1;
     this.majorDiagHash[majorIndex] = !this.majorDiagHash[majorIndex] ? 1 : this.majorDiagHash[majorIndex] + 1;
